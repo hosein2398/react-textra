@@ -1,6 +1,6 @@
 
 
-# react-textra  
+# react-textra  ![example workflow](https://github.com/hosein2398/react-textra/actions/workflows/ci.yml/badge.svg)
 
  Animate text in react. [demo](https://hosein2398.github.io/react-textra/)
 - simple
@@ -29,11 +29,10 @@ If you want to stop longer:
 ```
 
 
-If you want animation to take longer:
+If you want to change animation duration:
 ```html
  <Textra effect='flash' duration={1000} data={['one', 'two', 'three']} />
 ```
-This one will loop around for ever.
 ## Props
 
 | Prop        | Detail           | Type  | Default
