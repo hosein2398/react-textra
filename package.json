@@ -1,6 +1,6 @@
 {
   "name": "react-textra",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "text slider react component",
   "main": "./lib/Textra.js",
   "module": "./lib/esm/Textra.js",
@@ -8,7 +8,7 @@
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc --build",
     "build:esm": "tsc -p ./tsconfig.json --module es2015 --target es5 --outDir lib/esm",
-    "prepublishOnly": "npm run bulid",
+    "prepublishOnly": "npm run build",
     "test": "jest"
   },
   "author": "Hosein2398 <hosein2398@gmail.com>",
