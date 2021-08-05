@@ -12,6 +12,21 @@ type AnimationObjects = {
 }
 
 const animationStyles: AnimationObjects = {
+  simple: [{
+    translate: {
+      type: 'translateX',
+      value: 0,
+      unit: 'px'
+    },
+    opacity: 1
+  }, {
+    translate: {
+      type: 'translateX',
+      value: 0,
+      unit: 'px'
+    },
+    opacity: 0
+  }],
   rightLeft: [{
     translate: {
       type: 'translateX',

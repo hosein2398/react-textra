@@ -43,9 +43,10 @@ If you want to change animation duration:
 | duration | animation duration     |    Number | 500ms
 
 ## Effects
-There are 8 types of effects available:
+There are 9 types of effects available:
 | effect |
 | :------- |
+| simple |
 | rightLeft |
 | leftRight |
 | topDown |

@@ -12,7 +12,7 @@ type TextraProps = {
 };
 
 const Textra = (props: TextraProps) => {
-  const selectedAnimation = props.effect
+  const selectedAnimation = props.effect || 'simple'
   const animationRef = useRef<number | null>(null)
   const [style, setStyle] = useState<AnimateObject>(
     animationStyles[selectedAnimation][0]

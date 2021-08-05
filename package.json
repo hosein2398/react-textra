@@ -1,6 +1,6 @@
 {
   "name": "react-textra",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "text slider react component",
   "main": "./lib/Textra.js",
   "module": "./lib/esm/Textra.js",
