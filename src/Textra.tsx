@@ -1,11 +1,11 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import animationStyles from './animationStyles'
-import type { AnimateObject } from './animationStyles'
+import type { AnimateObject, Effect } from './animationStyles'
 
 type TextraProps = {
   data: string[];
-  effect: keyof typeof animationStyles;
+  effect?: Effect;
   duration?: number;
   stopDuration?: number;
   className?: string;
