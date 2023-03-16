@@ -57,7 +57,7 @@ There are 9 types of effects available:
 | press | 
 | scale |
 
-## A11ly concerns
+## A11y concerns
 We do not provide any aria attributes by default. But it is recommended to use [aria-live](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) and [aria-relevant](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-relevant). 
 Here is an example of how you can use these attributes alongside this library:
 ```html
