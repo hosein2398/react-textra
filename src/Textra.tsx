@@ -126,8 +126,6 @@ const Textra = (props: TextraProps) => {
   return (
     <>
       <span
-        aria-live='polite'
-        aria-relevant='text removals'
         style={{
           display: 'inline-block',
           transform: `${style.translate.type}(${style.translate.value}${style.translate.unit})`,
