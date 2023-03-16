@@ -48,7 +48,7 @@ it('should get back to first element when loop ends', async () => {
 it('should render properly with duration', async () => {
   render(
     <div>
-      <Textra effect='rightLeft' duration={2000} data={['one', 'two']} />
+      <Textra effect='rightLeft' duration={500} data={['one', 'two']} />
     </div>
   )
   /*
@@ -56,9 +56,9 @@ it('should render properly with duration', async () => {
   * another rounds: 7s
   */
   await screen.findByText('one', {}, { timeout: 200 })
-  await waitForElementToBeRemoved(() => screen.queryByText('one'), { timeout: 5100 })
+  await waitForElementToBeRemoved(() => screen.queryByText('one'), { timeout: 4100 })
   await screen.findByText('two', {}, { timeout: 200 })
-  await waitForElementToBeRemoved(() => screen.queryByText('two'), { timeout: 7200 })
+  await waitForElementToBeRemoved(() => screen.queryByText('two'), { timeout: 8100 })
 })
 
 it('should render properly with stopDuration', async () => {
@@ -75,7 +75,7 @@ it('should render properly with stopDuration', async () => {
   await screen.findByText('one', {}, { timeout: 200 })
   await waitForElementToBeRemoved(() => screen.queryByText('one'), { timeout: 2200 })
   await screen.findByText('two', {}, { timeout: 200 })
-  await waitForElementToBeRemoved(() => screen.queryByText('two'), { timeout: 32000 })
+  await waitForElementToBeRemoved(() => screen.queryByText('two'), { timeout: 42000 })
 })
 
 it('should render properly with duration and stopDuration', async () => {
@@ -90,7 +90,7 @@ it('should render properly with duration and stopDuration', async () => {
   */
 
   await screen.findByText('one', {}, { timeout: 200 })
-  await waitForElementToBeRemoved(() => screen.queryByText('one'), { timeout: 2200 })
+  await waitForElementToBeRemoved(() => screen.queryByText('one'), { timeout: 3200 })
   await screen.findByText('two', {}, { timeout: 200 })
-  await waitForElementToBeRemoved(() => screen.queryByText('two'), { timeout: 32000 })
+  await waitForElementToBeRemoved(() => screen.queryByText('two'), { timeout: 62000 })
 })

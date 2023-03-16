@@ -7,11 +7,11 @@ export type AnimateObject = {
   opacity: number
 }
 
-type AnimationObjects = {
-  [key : string] : AnimateObject[]
-}
+export type Animations = 'simple' | 'rightLeft' |
+ 'leftRight' | 'topDown' | 'downTop' | 'flash' |
+'flip' | 'scale' | 'press'
 
-const animationStyles: AnimationObjects = {
+const animationStyles: Record<Animations, AnimateObject[]> = {
   simple: [{
     translate: {
       type: 'translateX',
