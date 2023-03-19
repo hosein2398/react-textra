@@ -18,23 +18,17 @@ const Textra = (props: TextraProps) => {
     animationStyles[selectedAnimation][0]
   )
   const textArrIndex = useRef(0)
-  const [text, setText] = useState<string>(props.data[textArrIndex.current])
   const previousTime = useRef<number | null>(null)
   const animationDuration = props.duration || 500
   const stopDuration = props.stopDuration || 3000
   const currentRoundStartTime = useRef(0)
-  const singleRoundTime = stopDuration + 2 * animationDuration
-  const hasUpdatedText = useRef(false)
+  const singleRoundDuration = stopDuration + 2 * animationDuration
   const easeOutQuad = (t: number): number => t * (2 - t)
+  const text = props.data[textArrIndex.current]
 
   useEffect(() => {
     setStyle(animationStyles[selectedAnimation][0])
   }, [selectedAnimation])
-
-  useEffect(() => {
-    setText(props.data[textArrIndex.current])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [textArrIndex.current, props.data])
 
   const runShowTextAnimation = (elapsed: number) => {
     const showingTranlateInitial =
@@ -62,7 +56,7 @@ const Textra = (props: TextraProps) => {
       animationStyles[selectedAnimation][1].translate.value
     const hidingOpacityInitial = animationStyles[selectedAnimation][0].opacity
     const hidingTiming = easeOutQuad(
-      (elapsed - (currentRoundStartTime.current + singleRoundTime - animationDuration)) /
+      (elapsed - (currentRoundStartTime.current + singleRoundDuration - animationDuration)) /
         animationDuration
     )
     setStyle((s) => ({
@@ -81,6 +75,7 @@ const Textra = (props: TextraProps) => {
       textArrIndex.current = textArrIndex.current + 1
     }
   }
+  const updateRoudStartTime = () => { currentRoundStartTime.current += singleRoundDuration }
 
   const runAnimation = useCallback(
     (timestamps) => {
@@ -93,28 +88,22 @@ const Textra = (props: TextraProps) => {
       ) {
         runShowTextAnimation(elapsed)
       }
+
       if (
-        elapsed > currentRoundStartTime.current + singleRoundTime - animationDuration &&
-        elapsed < currentRoundStartTime.current + singleRoundTime
+        elapsed > currentRoundStartTime.current + singleRoundDuration - animationDuration &&
+        elapsed < currentRoundStartTime.current + singleRoundDuration
       ) {
         runHideTextAnimation(elapsed)
       }
 
-      if (elapsed > currentRoundStartTime.current + singleRoundTime) {
-        if (!hasUpdatedText.current) {
-          updateTextIndex()
-          hasUpdatedText.current = true
-        }
-      }
-
-      if (elapsed > currentRoundStartTime.current + singleRoundTime) {
-        hasUpdatedText.current = false
-        currentRoundStartTime.current += singleRoundTime
+      if (elapsed > currentRoundStartTime.current + singleRoundDuration) {
+        updateRoudStartTime()
+        updateTextIndex()
       }
 
       animationRef.current = window.requestAnimationFrame(runAnimation)
     },
-    [selectedAnimation, props.data.length, singleRoundTime, animationDuration]
+    [selectedAnimation, props.data.length, singleRoundDuration, animationDuration]
   )
 
   useEffect(() => {
