@@ -9,6 +9,7 @@ type TextraProps = {
   duration?: number;
   stopDuration?: number;
   className?: string;
+  onUpdate?: (index: number) => void
 };
 
 const Textra = (props: TextraProps) => {
@@ -76,6 +77,7 @@ const Textra = (props: TextraProps) => {
     }
   }
   const updateRoudStartTime = () => { currentRoundStartTime.current += singleRoundDuration }
+  const handlePropEvents = () => { props.onUpdate && props.onUpdate(textArrIndex.current) }
 
   const runAnimation = useCallback(
     (timestamps) => {
@@ -99,6 +101,7 @@ const Textra = (props: TextraProps) => {
       if (elapsed > currentRoundStartTime.current + singleRoundDuration) {
         updateRoudStartTime()
         updateTextIndex()
+        handlePropEvents()
       }
 
       animationRef.current = window.requestAnimationFrame(runAnimation)
