@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useEffect, useRef, useState, useCallback } from 'react'
+import React, { useEffect, useRef, useState, useCallback, ReactElement } from 'react'
 import animationStyles from './animationStyles'
 import type { AnimateObject, Animations } from './animationStyles'
 
 type TextraProps = {
-  data: string[];
+  data: string[] | ReactElement[];
   effect?: Animations;
   duration?: number;
   stopDuration?: number;
