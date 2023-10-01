@@ -13,19 +13,25 @@ type TextraProps = {
 };
 
 const Textra = (props: TextraProps) => {
-  const selectedAnimation = props.effect || 'simple'
+  const {
+    duration: animationDuration = 500,
+    effect,
+    stopDuration = 3000,
+    data,
+    onUpdate,
+    ...rest
+  } = props
+  const selectedAnimation = effect || 'simple'
   const animationRef = useRef<number | null>(null)
   const [style, setStyle] = useState<AnimateObject>(
     animationStyles[selectedAnimation][0]
   )
   const textArrIndex = useRef(0)
   const previousTime = useRef<number | null>(null)
-  const animationDuration = props.duration || 500
-  const stopDuration = props.stopDuration || 3000
   const currentRoundStartTime = useRef(0)
   const singleRoundDuration = stopDuration + 2 * animationDuration
   const easeOutQuad = (t: number): number => t * (2 - t)
-  const text = props.data[textArrIndex.current]
+  const text = data[textArrIndex.current]
 
   useEffect(() => {
     setStyle(animationStyles[selectedAnimation][0])
@@ -70,14 +76,14 @@ const Textra = (props: TextraProps) => {
   }
 
   const updateTextIndex = () => {
-    if (textArrIndex.current === props.data.length - 1) {
+    if (textArrIndex.current === data.length - 1) {
       textArrIndex.current = 0
     } else {
       textArrIndex.current = textArrIndex.current + 1
     }
   }
   const updateRoudStartTime = () => { currentRoundStartTime.current += singleRoundDuration }
-  const handlePropEvents = () => { props.onUpdate && props.onUpdate(textArrIndex.current) }
+  const handlePropEvents = () => { onUpdate && onUpdate(textArrIndex.current) }
 
   const runAnimation = useCallback(
     (timestamps) => {
@@ -106,14 +112,14 @@ const Textra = (props: TextraProps) => {
 
       animationRef.current = window.requestAnimationFrame(runAnimation)
     },
-    [selectedAnimation, props.data.length, singleRoundDuration, animationDuration]
+    [selectedAnimation, data.length, singleRoundDuration, animationDuration]
   )
 
   useEffect(() => {
     animationRef.current = window.requestAnimationFrame(runAnimation)
 
     return () => window.cancelAnimationFrame(animationRef.current as number)
-  }, [runAnimation, props.effect])
+  }, [runAnimation, effect])
 
   return (
     <>
@@ -123,7 +129,7 @@ const Textra = (props: TextraProps) => {
           transform: `${style.translate.type}(${style.translate.value}${style.translate.unit})`,
           opacity: style.opacity
         }}
-        {...props}
+        {...rest}
       >
         {text}
       </span>
