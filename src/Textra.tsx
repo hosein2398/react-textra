@@ -7,7 +7,7 @@ type TextraProps = {
   data: string[];
   effect?: Animations;
   duration?: number;
-  stopDuration?: number;
+  pauseDelay?: number;
   className?: string;
   onUpdate?: (index: number) => void
 };
@@ -21,9 +21,9 @@ const Textra = (props: TextraProps) => {
   const textArrIndex = useRef(0)
   const previousTime = useRef<number | null>(null)
   const animationDuration = props.duration || 500
-  const stopDuration = props.stopDuration || 3000
+  const pauseDelay = props.pauseDelay || 3000
   const currentRoundStartTime = useRef(0)
-  const singleRoundDuration = stopDuration + 2 * animationDuration
+  const singleRoundDuration = pauseDelay + 2 * animationDuration
   const easeOutQuad = (t: number): number => t * (2 - t)
   const text = props.data[textArrIndex.current]
 
